@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SCRIPT_LOCATION=$(pwd)
+rm /usr/local/bin/make-ssh
+ln -s $SCRIPT_LOCATION/make-ssh /usr/local/bin/make-ssh
+

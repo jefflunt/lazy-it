@@ -1,0 +1,16 @@
+#!/bin/bash
+
+LOGFILE=/var/log/naivepatch.log
+WHOAMI=$(whoami)
+SCRIPT_LOCATION=$(pwd)
+
+rm /usr/local/bin/naivepatch
+ln -s $SCRIPT_LOCATION/naivepatch /usr/local/bin/naivepatch
+
+sudo touch $LOGFILE
+sudo chown $WHOAMI $LOGFILE
+sudo chmod 644 $LOGFILE
+
+printf "NOTE: Sample cron job to run patching daily:\n"
+printf "@daily /usr/local/bin/naivepatch >> $LOGFILE\n"
+

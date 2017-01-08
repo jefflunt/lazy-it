@@ -1,0 +1,14 @@
+#!/bin/bash
+# Generates an SSH key using recommended settings
+
+KEYSTRENGTH=4096
+
+if [ $# -lt 2 ] || [ $# -gt 2 ]; then
+  printf "USAGE: make-ssh <comment> <output-filename>\n"
+  exit 1
+fi
+
+printf "Creating RSA key with key strength of $KEYSTRENGTH\n"
+ssh-keygen -t rsa -b 4096 -P "" -C "$1" -f $2
+printf "> $2\n"
+printf "> $2.pub\n"

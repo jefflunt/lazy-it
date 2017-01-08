@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+printf "\n---------------------------------------------------\n"
+printf "NAIVEPATCH "
+
+DATETIME=$(date "+%Y-%m-%d %H:%M:%S %Z")
+printf $DATETIME
+
+TMP_SHA_SUM=$(shasum /usr/local/bin/naivepatch)
+PATCH=${TMP_SHA_SUM:0:12}
+printf " v.$PATCH\n"
+
+printf "NAIVEPATCH apt-get autoclean ...\n"
+sudo apt-get autoclean
+
+printf "\nNAIVEPATCH apt-get autoremove ...\n"
+sudo apt-get autoremove
+
+printf "\nNAIVEPATCH apt-get update ...\n"
+sudo apt-get -y update
+
+printf "\nNAIVEPATCH apt-get dist-upgrade ...\n"
+sudo apt-get -y dist-upgrade
+
+printf "\nNAIVEPATCH rebooting ...\n"
+sudo reboot
