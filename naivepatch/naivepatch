@@ -1,27 +1,46 @@
 #!/bin/bash
 set -e
 
+NOTIFY_TOPIC=$1
+NOTIFY_PROTOCOL=$2
+NOTIFY_HOST=$3
+NOTIFY_PORT=$4
+HOSTNAME=$(hostname)
+
+if [ "$#" -ne 4 ]; then
+  printf "Usage:\n"
+  printf "  naivepatch <topic> <protocol> <host> <port>\n"
+  exit 1
+fi
+
+# Supporting functions
+notify() {
+  echo -n "pub #$NOTIFY_TOPIC $1" > /dev/$NOTIFY_PROTOCOL/$NOTIFY_HOST/$NOTIFY_PORT
+}
+
+apt() {
+  printf "NAIVEPATCH apt-get $1 ...\n"
+  notify "$HOSTNAME $1"
+  sudo apt-get -y $1
+}
+
+# Main
 printf "\n---------------------------------------------------\n"
 printf "NAIVEPATCH "
 
 DATETIME=$(date "+%Y-%m-%d %H:%M:%S %Z")
 printf $DATETIME
+notify "$HOSTNAME start"
 
 TMP_SHA_SUM=$(shasum /usr/local/bin/naivepatch)
 PATCH=${TMP_SHA_SUM:0:12}
 printf " v.$PATCH\n"
 
-printf "NAIVEPATCH apt-get autoclean ...\n"
-sudo apt-get autoclean
-
-printf "\nNAIVEPATCH apt-get autoremove ...\n"
-sudo apt-get autoremove
-
-printf "\nNAIVEPATCH apt-get update ...\n"
-sudo apt-get -y update
-
-printf "\nNAIVEPATCH apt-get dist-upgrade ...\n"
-sudo apt-get -y dist-upgrade
+apt autoclean
+apt autoremove
+apt update
+apt dist-upgrade
 
 printf "\nNAIVEPATCH rebooting ...\n"
+notify "$HOSTNAME rebooting"
 sudo reboot
