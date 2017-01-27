@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ $# -ne 5 ]] ; then
+  printf "Usage:\n"
+  printf "  mini-pub <tcp/udp> <host> <port> <channel> <message>\n"
+  exit 1
+fi
+
+echo -n "pub #$4 $5" > /dev/$1/$2/$3

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SCRIPT_LOCATION=$(pwd)
+
+rm /usr/local/bin/mini-pub
+ln -s $SCRIPT_LOCATION/mini-pub /usr/local/bin/mini-pub
