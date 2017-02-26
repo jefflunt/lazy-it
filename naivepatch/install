@@ -12,5 +12,4 @@ sudo chown $WHOAMI $LOGFILE
 sudo chmod 644 $LOGFILE
 
 printf "NOTE: Sample cron job to run patching daily:\n"
-printf "@daily /usr/local/bin/naivepatch >> $LOGFILE\n"
-
+printf "@daily /usr/local/bin/naivepatch naivepatch <protocol> <host/ip> <port: default 29239> >> $LOGFILE\n"
