@@ -30,7 +30,7 @@ printf "NAIVEPATCH "
 
 DATETIME=$(date "+%Y-%m-%d %H:%M:%S %Z")
 printf $DATETIME
-notify "$HOSTNAME start"
+notify "$DATETIME $HOSTNAME start"
 
 TMP_SHA_SUM=$(shasum /usr/local/bin/naivepatch)
 PATCH=${TMP_SHA_SUM:0:12}
