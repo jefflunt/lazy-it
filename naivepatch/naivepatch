@@ -20,7 +20,6 @@ notify() {
 
 apt() {
   printf "NAIVEPATCH apt-get $1 ...\n"
-  notify "$HOSTNAME $1"
   sudo apt-get -y $1
 }
 
@@ -42,5 +41,5 @@ apt update
 apt dist-upgrade
 
 printf "\nNAIVEPATCH rebooting ...\n"
-notify "$HOSTNAME rebooting"
+notify "$DATETIME $HOSTNAME reboot"
 sudo reboot
