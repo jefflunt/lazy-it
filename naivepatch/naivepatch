@@ -41,5 +41,6 @@ apt update
 apt dist-upgrade
 
 printf "\nNAIVEPATCH rebooting ...\n"
-notify "$DATETIME $HOSTNAME reboot"
+DATETIME=$(date "+%Y-%m-%d %H:%M:%S %Z")
+notify "$DATETIME $HOSTNAME finish"
 sudo reboot
