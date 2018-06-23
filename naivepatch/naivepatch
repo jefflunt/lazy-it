@@ -27,9 +27,8 @@ apt() {
 printf "\n---------------------------------------------------\n"
 printf "NAIVEPATCH "
 
-DATETIME=$(date "+%Y-%m-%d %H:%M:%S %Z")
-printf $DATETIME
-notify "$DATETIME $HOSTNAME start"
+START_DATE=$(date "+%Y-%m-%d %H:%M:%S %Z")
+printf $START_DATE
 
 TMP_SHA_SUM=$(shasum /usr/local/bin/naivepatch)
 PATCH=${TMP_SHA_SUM:0:12}
@@ -41,6 +40,6 @@ apt update
 apt dist-upgrade
 
 printf "\nNAIVEPATCH rebooting ...\n"
-DATETIME=$(date "+%Y-%m-%d %H:%M:%S %Z")
-notify "$DATETIME $HOSTNAME finish"
+END_DATE=$(date "+%Y-%m-%d %H:%M:%S %Z")
+notify "$START_DATE-$END_DATE $HOSTNAME finish"
 sudo reboot
