@@ -6,4 +6,4 @@ if [[ $# -ne 5 ]] ; then
   exit 1
 fi
 
-echo -n "pub #$4 $5" > /dev/$1/$2/$3
+echo -n "pub $4 $5" > /dev/$1/$2/$3
