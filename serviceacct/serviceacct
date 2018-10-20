@@ -1,11 +1,10 @@
 #!/bin/bash
 
 if [ $# -lt 1 ] || [ $# -gt 1 ]; then
-  printf "USAGE: serviceacct-sudo <username>\n"
+  printf "USAGE: serviceacct <username>\n"
   exit 1
 fi
 
 printf "Adding user '$1' ...\n"
 sudo useradd $1
-sudo usermod -aG sudo $1
 sudo passwd $1

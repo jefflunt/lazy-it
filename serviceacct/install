@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SCRIPT_LOCATION=$(pwd)
+rm /usr/local/bin/serviceacct
+ln -s $SCRIPT_LOCATION/serviceacct /usr/local/bin/serviceacct
